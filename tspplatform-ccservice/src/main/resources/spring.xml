@@ -1,0 +1,47 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop   
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd   
+        http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd   
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd   
+        http://www.springframework.org/schema/mvc   
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd   
+        http://www.springframework.org/schema/tx   
+        http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+    	http://cxf.apache.org/jaxws  
+    	http://cxf.apache.org/schemas/jaxws.xsd
+    	http://cxf.apache.org/jaxrs  
+    	http://cxf.apache.org/schemas/jaxrs.xsd">
+
+
+	<!--引入配置属性文件 -->
+	<!-- <context:property-placeholder location="classpath:config.properties" 
+		/> -->
+
+	<!--自动扫描含有@Service将其注入为bean -->
+	<context:component-scan base-package="com.vcyber.tspplatform" />
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	
+	<!-- 3.0版本不需要 <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> 
+		<import resource="classpath:META-INF/cxf/cxf-servlet.xml" /> -->
+
+
+	<!-- soap webservice  server-->
+	<jaxws:endpoint id="ccService"
+		implementor="com.vcyber.tspplatform.service.impl.CCServiceImpl"
+		address="/CCService">
+	</jaxws:endpoint>
+
+
+	<!--soap webservice client -->
+    <jaxws:client id="ringCallService"  
+        address="http://59.46.215.194:5355/TSPCCService.asmx"  
+        serviceClass="com.vcyber.tspplatform.service.client.TSPCCServiceSoap" />  
+        
+</beans>
