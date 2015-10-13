@@ -1,6 +1,6 @@
 # spring-webservice-demo
-spring-webservice-demo
-一个CXF Spring 整合的DEMO
+
+一个CXF Spring 整合的webservice DEMO 项目，maven多模块。
 
 包含：
 --spring4.2.1
